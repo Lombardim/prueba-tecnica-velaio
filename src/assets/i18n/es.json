@@ -1,0 +1,13 @@
+{
+    "HOME": {
+        "ROUTE": {
+            "LIST": "Lista de tareas",
+            "CREATE": "Crear tarea",
+            "EDIT": "Editar tarea"
+        },
+        "LANGUAGE": {
+            "SPANISH": "Español",
+            "ENGLISH": "Ingles"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<section class="w-full h-full">
+    <header class="flex justify-between px-4 py-4">
+        <div>{{'HOME.ROUTE.LIST' | translate}}</div>
+        <div>{{currentLanguage.logo}} - {{'HOME.LANGUAGE.' + currentLanguage.value.toUpperCase() | translate}}</div>
+    </header>
+    <router-outlet></router-outlet>
+</section>

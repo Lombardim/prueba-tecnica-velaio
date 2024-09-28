@@ -1,0 +1,13 @@
+{
+    "HOME": {
+        "ROUTE": {
+            "LIST": "Tasks list",
+            "CREATE": "Create task",
+            "EDIT": "Edit task"
+        },
+        "LANGUAGE": {
+            "SPANISH": "Spanish",
+            "ENGLISH": "English"
+        }
+    }
+}
