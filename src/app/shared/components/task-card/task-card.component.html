@@ -1,0 +1,18 @@
+<article class="flex gap-1 flex-col border-solid border-2  dark:border-sky-400 border-sky-500 rounded-[.5rem] px-6 py-2">
+  <header>
+    <h2 class="text-slate-900 dark:text-slate-200 text-xl xl:text-2xl font-bold">
+      {{taskData.name}} - <time class="text-sky-500 dark:text-sky-400">{{taskData.deadline}}</time>
+    </h2>
+  </header>
+  <div>
+    <header>
+      <h3 class="text-slate-900 dark:text-slate-200 text-lg xl:text-xl font-semibold">{{'HOME.LIST.ASSOCIATED-PEOPLE' | translate}}:</h3>
+    </header>
+    <ul>
+      <li class="pl-4 text-slate-900 dark:text-slate-200 text-lg xl:text-xl font-normal" *ngFor="let person of associatedPeople">
+        <p>{{person.fullName}} ({{person.age}})</p>
+        <p>{{'HOME.LIST.SKILLS' | translate}}: {{person.skills.join(', ')}}</p>
+      </li>
+    </ul>
+  </div>
+</article>
