@@ -1,7 +1,14 @@
 <section class="w-full h-full">
-    <header class="flex justify-between px-4 py-4">
-        <div>{{'HOME.ROUTE.LIST' | translate}}</div>
-        <div>{{currentLanguage.logo}} - {{'HOME.LANGUAGE.' + currentLanguage.value.toUpperCase() | translate}}</div>
-    </header>
-    <router-outlet></router-outlet>
+  <header class="flex justify-between px-2 py-4">
+    <h1 class="text-slate-900 dark:text-slate-200 text-3xl xl:text-4xl font-extrabold">{{'HOME.ROUTE.LIST' | translate}}</h1>
+    <div class="flex gap-2 items-center">
+      <app-custom-icon [customLeft]="-200" [customTop]="20" (click)="changeTheme()"
+        [iconName]="!isLightMode ? 'invert bg-light-mode-icon' : 'invert-0 bg-dark-mode-icon'"
+        [customTooltip]="'GLOBAL.THEME.' + (!isLightMode ? 'CHANGE-LIGHT-MODE' : 'CHANGE-DARK-MODE') | translate"
+        imageClass="h-[1.5rem] w-[1.5rem] xl:h-[2rem] xl:w-[2rem] cursor-pointer bg-cover"></app-custom-icon>
+      <app-custom-select [options]="languages" [labelIcon]="currentLanguage.logo" (selectedOption)="changeLanguage($event)"
+        [label]="'HOME.LANGUAGE.' + currentLanguage.value.toUpperCase()"></app-custom-select>
+    </div>
+  </header>
+  <router-outlet></router-outlet>
 </section>
