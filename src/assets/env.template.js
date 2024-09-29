@@ -1,5 +1,5 @@
-(function (window) {
-    window['env'] = window['env'] || {};
-    window['env'].production = '${production}' === 'true';
-    window['env'].api = '${api}';
-})(this);
+(function (global) {
+    global['env'] = global['env'] || {};
+    global['env'].production = '${production}' === 'true';
+    global['env'].api = '${api}';
+})(typeof window !== 'undefined' ? window : self);

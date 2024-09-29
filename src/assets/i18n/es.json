@@ -1,13 +1,27 @@
 {
-    "HOME": {
-        "ROUTE": {
-            "LIST": "Lista de tareas",
-            "CREATE": "Crear tarea",
-            "EDIT": "Editar tarea"
-        },
-        "LANGUAGE": {
-            "SPANISH": "Español",
-            "ENGLISH": "Ingles"
-        }
+  "GLOBAL": {
+    "THEME": {
+      "CHANGE-LIGHT-MODE": "Cambiar a modo claro",
+      "CHANGE-DARK-MODE": "Cambiar a modo oscuro"
     }
+  },
+  "HOME": {
+    "ROUTE": {
+      "LIST": "Lista de tareas",
+      "CREATE": "Crear tarea",
+      "EDIT": "Editar tarea"
+    },
+    "LANGUAGE": {
+      "SPANISH": "Español",
+      "ENGLISH": "Ingles"
+    },
+    "LIST": {
+      "FILTERS": "Filtros",
+      "ALL": "Todas",
+      "COMPLETED": "Completadas",
+      "PENDING": "Pendientes",
+      "ASSOCIATED-PEOPLE": "Personas asociadas",
+      "SKILLS": "Habilidades"
+    }
+  }
 }

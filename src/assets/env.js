@@ -1,5 +1,5 @@
-(function (window) {
-    window['env'] = window['env'] || {};
-    window['env'].production = 'false' === 'true';
-    window['env'].api = 'https://jsonplaceholder.typicode.com/';
-})(this);
+(function (global) {
+    global['env'] = global['env'] || {};
+    global['env'].production = 'false' === 'true';
+    global['env'].api = 'https://jsonplaceholder.typicode.com/';
+})(typeof window !== 'undefined' ? window : self);

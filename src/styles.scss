@@ -1,3 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  outline: none;
+}
+
+.custom-tooltip {
+  @apply text-slate-900 dark:text-slate-200 text-xl xl:text-2xl dark:bg-slate-700 bg-slate-200;
+  position: fixed;
+  padding: .25rem 1.125rem .475rem;
+  border-radius: .75rem;
+  box-shadow: 0 0 1.5px 0.5px rgba(19, 23, 33, 0.15);
+  z-index: 9999;
+  pointer-events: none;
+}
+.custom-select {
+  @apply bg-transparent text-lg xl:text-xl text-slate-900 dark:text-slate-200 relative;
+
+  .select-header {
+    user-select: none;
+    display: flex;
+    cursor: pointer;
+    gap: .5rem;
+    align-items: center;
+    padding: .5rem 1rem;
+  }
+
+  .select-menu {
+    @apply dark:bg-slate-700 bg-slate-200 absolute w-full;
+    top: 100%;
+    padding: 0 1rem;
+    border-radius: 0 0 .25rem .25rem;
+
+    .select-option {
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      padding: .5rem 0;
+      align-items: center;
+      gap: .5rem;
+    }
+  }
+}
+
+.scrollbar {
+  &::-webkit-scrollbar {
+    @apply bg-slate-300 dark:bg-slate-400 sticky;
+    -webkit-appearance: none;
+    width: .625rem;
+    position: sticky;
+    border-radius: .625px;
+    opacity: 70%;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: .625rem;
+  }
+
+  &::-webkit-scrollbar-button:increment,
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: .625rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-sky-500 dark:bg-sky-400 shadow-sky-500 dark:shadow-sky-400;
+    border-radius: .5rem;
+    -webkit-box-shadow: inset 0 0 1px;
+  }
+}
+
+.outlined-button, .filled-button {
+  @apply rounded-[.5rem] text-lg xl:text-xl;
+  padding: .5rem 1rem;
+}
+
+.outlined-button {
+  @apply border-solid border-2 border-sky-500 dark:border-sky-400 text-slate-900 dark:text-slate-200;
+}
+
+.filled-button {
+  @apply bg-sky-500 dark:bg-sky-400 text-slate-200;
+}

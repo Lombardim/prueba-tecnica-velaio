@@ -1,13 +1,27 @@
 {
-    "HOME": {
-        "ROUTE": {
-            "LIST": "Tasks list",
-            "CREATE": "Create task",
-            "EDIT": "Edit task"
-        },
-        "LANGUAGE": {
-            "SPANISH": "Spanish",
-            "ENGLISH": "English"
-        }
+  "GLOBAL": {
+    "THEME": {
+      "CHANGE-LIGHT-MODE": "Change to light mode",
+      "CHANGE-DARK-MODE": "Change to dark mode"
     }
+  },
+  "HOME": {
+    "ROUTE": {
+      "LIST": "Tasks list",
+      "CREATE": "Create task",
+      "EDIT": "Edit task"
+    },
+    "LANGUAGE": {
+      "SPANISH": "Spanish",
+      "ENGLISH": "English"
+    },
+    "LIST": {
+      "FILTERS": "Filters",
+      "ALL": "All",
+      "COMPLETED": "Completed",
+      "PENDING": "Pending",
+      "ASSOCIATED-PEOPLE": "Associated people",
+      "SKILLS": "Skills"
+    }
+  }
 }
