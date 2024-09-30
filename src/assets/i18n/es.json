@@ -20,6 +20,7 @@
       "NUMERIC": "Solo acepta números",
       "EMPTY-SKILL": "La habilidad no puede estar vacía",
       "NO-SKILLS": "La persona debe tener al menos 1 habilidad",
+      "NO-PERSON-ASSIGNED": "La tarea debe tener al menos 1 persona asignada",
       "UNRECOGNIZED": "Tiene un error desconocido"
     }
   },

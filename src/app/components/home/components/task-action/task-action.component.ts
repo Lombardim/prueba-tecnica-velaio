@@ -68,6 +68,7 @@ export class TaskActionComponent implements OnInit {
     0: [],
   };
   editPersonForm?: FormGroup<CreateUserForm>;
+  editPersonSkills?: string[];
   editingPerson = 0;
   showCancelButton = false;
   creatingPerson = false;
@@ -203,11 +204,13 @@ export class TaskActionComponent implements OnInit {
       if (this.addedSkills[i]) {
         delete this.addedSkills[i];
       }
-    } else if (this.editPersonForm) {
+    } else if (this.editPersonForm && this.editPersonSkills) {
       this.associatedPeople.controls[i].controls.fullName.setValue(this.editPersonForm.controls.fullName.value);
       this.associatedPeople.controls[i].controls.age.setValue(this.editPersonForm.controls.age.value);
       this.associatedPeople.controls[i].controls.skills.setValue(this.editPersonForm.controls.skills.value);
+      this.addedSkills[i] = this.editPersonSkills;
       this.editPersonForm = undefined;
+      this.editPersonSkills = undefined;
     }
     this.creatingPerson = false;
   }
@@ -221,6 +224,11 @@ export class TaskActionComponent implements OnInit {
       this.toast.error(this.translate.instant('GLOBAL.ERROR.NAME-EXISTS'));
     } else {
       if (associatedPerson.valid && this.addedSkills[i].length > 0) {
+        if (this.creatingPerson) {
+          this.addedNames.push(associatedPerson.controls.fullName.value);
+        } else {
+          this.addedNames[i] = associatedPerson.controls.fullName.value;
+        }
         this.editingPerson = -1;
       } else {
         this.toast.error(this.detectPersonInvalidField(associatedPerson, i));
@@ -254,15 +262,19 @@ export class TaskActionComponent implements OnInit {
       }
       try {
         const body: CreateTaskData = this.getCreateBody();
-        if (this.type === 'edit') {
-          body.id = this.editingTaskId;
-          await this.taskService.updateTask(body);
-          this.toast.success(this.translate.instant('HOME.ACTION.EDIT-TASK'));
+        if (Object.keys(body.associatedPeople).length === 0) {
+          this.toast.error(this.translate.instant('GLOBAL.ERROR.NO-PERSON-ASSIGNED'));
         } else {
-          await this.taskService.createTask(body);
-          this.toast.success(this.translate.instant('HOME.ACTION.CREATE-TASK'));
+          if (this.type === 'edit') {
+            body.id = this.editingTaskId;
+            await this.taskService.updateTask(body);
+            this.toast.success(this.translate.instant('HOME.ACTION.EDIT-TASK'));
+          } else {
+            await this.taskService.createTask(body);
+            this.toast.success(this.translate.instant('HOME.ACTION.CREATE-TASK'));
+          }
+          await this.goBack();
         }
-        await this.goBack();
       } catch (e) {
         console.error(e);
       }
@@ -350,6 +362,7 @@ export class TaskActionComponent implements OnInit {
         this.editPersonForm.controls.fullName.setValue(this.associatedPeople.controls[i].controls.fullName.value);
         this.editPersonForm.controls.age.setValue(this.associatedPeople.controls[i].controls.age.value);
         this.editPersonForm.controls.skills.setValue(this.associatedPeople.controls[i].controls.skills.value);
+        this.editPersonSkills = [...this.addedSkills[i]];
         break;
       }
       case 'remove': {

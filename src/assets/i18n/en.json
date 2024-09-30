@@ -20,6 +20,7 @@
       "NUMERIC": "Accepts only numbers",
       "EMPTY-SKILL": "Skill can not be empty",
       "NO-SKILLS": "The person must have at least 1 skill",
+      "NO-PERSON-ASSIGNED": "The task should have at least 1 person assigned",
       "UNRECOGNIZED": "Has an unrecognized error"
     }
   },
