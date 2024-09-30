@@ -3,13 +3,31 @@
     "THEME": {
       "CHANGE-LIGHT-MODE": "Change to light mode",
       "CHANGE-DARK-MODE": "Change to dark mode"
+    },
+    "INFORMATION": {
+      "PENDING-TASK": "Pending task",
+      "COMPLETED-TASK": "Completed task",
+      "CREATE-TASK": "Create task",
+      "BACK": "Back",
+      "CANCEL": "Cancel"
+    },
+    "ERROR": {
+      "DEFAULT": "A field has an error",
+      "NAME-EXISTS": "A person with that name already exists",
+      "REQUIRED": "Is required",
+      "MIN": "Should have a minimum value of [MIN-VALUE]",
+      "MIN-LENGTH": "Should have a minimum length of [MIN-LENGTH]",
+      "NUMERIC": "Accepts only numbers",
+      "EMPTY-SKILL": "Skill can not be empty",
+      "NO-SKILLS": "The person must have at least 1 skill",
+      "UNRECOGNIZED": "Has an unrecognized error"
     }
   },
   "HOME": {
     "ROUTE": {
-      "LIST": "Tasks list",
-      "CREATE": "Create task",
-      "EDIT": "Edit task"
+      "LIST": "Tasks List",
+      "CREATE": "Create New Task",
+      "EDIT": "Edit Task"
     },
     "LANGUAGE": {
       "SPANISH": "Spanish",
@@ -21,7 +39,26 @@
       "COMPLETED": "Completed",
       "PENDING": "Pending",
       "ASSOCIATED-PEOPLE": "Associated people",
-      "SKILLS": "Skills"
+      "SKILLS": "Skills",
+      "EDIT-TASK": "Edit task",
+      "MARK-AS-COMPLETED": "Mark task as completed",
+      "MARKED-AS-COMPLETED": "The task was marked as completed",
+      "DELETE-TASK": "Delete task",
+      "DELETED-TASK": "The task was successfully deleted"
+    },
+    "ACTION": {
+      "EDIT-TASK": "The task was successfully edited",
+      "CREATE-TASK": "A new task was successfully created",
+      "TASK-NAME": "Task name",
+      "DEADLINE": "Deadline",
+      "FULL-NAME": "Full name",
+      "AGE": "Age",
+      "ADD-SKILL": "Add skill",
+      "REMOVE-SKILL": "Remove skill",
+      "ADD-PERSON": "Add Person",
+      "EDIT-PERSON": "Edit Person",
+      "REMOVE-PERSON": "Remove person",
+      "SAVE-TASK": "Save task"
     }
   }
 }

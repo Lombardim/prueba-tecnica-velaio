@@ -7,7 +7,7 @@ export class CustomTooltipDirective implements OnDestroy{
   @Input() customTooltip?: string;
   @Input() customLeft: number | undefined = 10;
   @Input() customTop: number | undefined = -40;
-  @Input() customMaxWidth: number | undefined;
+  @Input() customMaxWidth: string | undefined;
   public tooltip?: HTMLDivElement;
 
   constructor(
@@ -16,7 +16,7 @@ export class CustomTooltipDirective implements OnDestroy{
 
   ngOnDestroy() {
     if (this.tooltip) {
-      this.renderer.removeChild(this.el.nativeElement, this.tooltip);
+      this.renderer.removeChild(this.tooltip.parentNode, this.tooltip);
     }
   }
 
@@ -38,15 +38,15 @@ export class CustomTooltipDirective implements OnDestroy{
     this.tooltip = this.renderer.createElement('div');
     if (this.tooltip) {
       this.renderer.addClass(this.tooltip, 'custom-tooltip');
-      this.tooltip.textContent = this.customTooltip;
+      const text = this.renderer.createText(this.customTooltip);
+      this.renderer.appendChild(this.tooltip, text);
 
       const hostElementRect = this.el.nativeElement.getBoundingClientRect();
-
       const tooltipTop = hostElementRect.top + this.customTop;
       const tooltipLeft = hostElementRect.left + this.customLeft;
 
       if (this.customMaxWidth) {
-        this.renderer.setStyle(this.tooltip, 'max-width', `${this.customMaxWidth}px`);
+        this.renderer.setStyle(this.tooltip, 'max-width', this.customMaxWidth);
       }
       this.renderer.setStyle(this.tooltip, 'top', `${tooltipTop}px`);
       this.renderer.setStyle(this.tooltip, 'left', `${tooltipLeft}px`);

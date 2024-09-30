@@ -3,13 +3,31 @@
     "THEME": {
       "CHANGE-LIGHT-MODE": "Cambiar a modo claro",
       "CHANGE-DARK-MODE": "Cambiar a modo oscuro"
+    },
+    "INFORMATION": {
+      "PENDING-TASK": "Tarea pendiente",
+      "COMPLETED-TASK": "Tarea completada",
+      "CREATE-TASK": "Crear tarea",
+      "BACK": "Volver",
+      "CANCEL": "Cancelar"
+    },
+    "ERROR": {
+      "DEFAULT": "Un campo tiene un error",
+      "NAME-EXISTS": "Una persona con ese nombre ya existe",
+      "REQUIRED": "Es requerido",
+      "MIN": "Debe tener un mínimo valor de [MIN-VALUE]",
+      "MIN-LENGTH": "Debe tener una mínima longitud de [MIN-LENGTH]",
+      "NUMERIC": "Solo acepta números",
+      "EMPTY-SKILL": "La habilidad no puede estar vacía",
+      "NO-SKILLS": "La persona debe tener al menos 1 habilidad",
+      "UNRECOGNIZED": "Tiene un error desconocido"
     }
   },
   "HOME": {
     "ROUTE": {
-      "LIST": "Lista de tareas",
-      "CREATE": "Crear tarea",
-      "EDIT": "Editar tarea"
+      "LIST": "Lista de Tareas",
+      "CREATE": "Crear Nueva Tarea",
+      "EDIT": "Editar Tarea"
     },
     "LANGUAGE": {
       "SPANISH": "Español",
@@ -21,7 +39,26 @@
       "COMPLETED": "Completadas",
       "PENDING": "Pendientes",
       "ASSOCIATED-PEOPLE": "Personas asociadas",
-      "SKILLS": "Habilidades"
+      "SKILLS": "Habilidades",
+      "EDIT-TASK": "Editar tarea",
+      "MARKED-AS-COMPLETED": "La tarea se marcó como completada",
+      "MARK-AS-COMPLETED": "Marcar tarea como completada",
+      "DELETED-TASK": "La tarea fue eliminada exitosamente",
+      "DELETE-TASK": "Eliminar tarea"
+    },
+    "ACTION": {
+      "EDIT-TASK": "La tarea fue editada exitosamente",
+      "CREATE-TASK": "Una nueva tarea fue creada exitosamente",
+      "TASK-NAME": "Nombre de la tarea",
+      "DEADLINE": "Fecha límite",
+      "FULL-NAME": "Nombre completo",
+      "AGE": "Edad",
+      "ADD-SKILL": "Añadir habilidad",
+      "REMOVE-SKILL": "Eliminar habilidad",
+      "ADD-PERSON": "Agregar persona",
+      "EDIT-PERSON": "Editar persona",
+      "REMOVE-PERSON": "Eliminar persona",
+      "SAVE-TASK": "Guardar tarea"
     }
   }
 }

@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TaskData} from '../../../../shared/interfaces/task.interface';
 import {TaskService} from '../../../../shared/services/task.service';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-task-list',
@@ -8,12 +11,15 @@ import {TaskService} from '../../../../shared/services/task.service';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  public selectedFilter: string = 'all';
+  public selectedFilter = 'all';
   tasks: TaskData[] = [];
   filteredTasks: TaskData[] = [];
 
   constructor(
+    private router: Router,
     private taskService: TaskService,
+    private translate: TranslateService,
+    private toast: ToastrService,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -43,6 +49,39 @@ export class TaskListComponent implements OnInit {
       }
       default: {
         this.filteredTasks = [...this.tasks];
+      }
+    }
+  }
+
+  async addNewTask() {
+    await this.router.navigate(['home/action'], {
+      queryParams: {type: 'create'},
+    });
+  }
+
+  async taskAction(action: string, i: number) {
+    switch (action) {
+      case 'edit': {
+        await this.router.navigate(['home/action'], {
+          queryParams: {type: 'edit', taskId: this.filteredTasks[i].id}
+        });
+        break;
+      }
+      case 'updateStatus': {
+        this.tasks = await this.taskService.markAsCompleted(this.filteredTasks[i].id);
+        this.filteredTasks = [];
+        setTimeout(async () => {
+            this.changeFilterType(this.selectedFilter);
+            this.toast.success(this.translate.instant('HOME.LIST.MARKED-AS-COMPLETED'));
+          }
+        );
+        break;
+      }
+      case 'delete': {
+        this.tasks = await this.taskService.deleteTask(this.filteredTasks[i].id);
+        this.changeFilterType(this.selectedFilter);
+        this.toast.success(this.translate.instant('HOME.LIST.DELETED-TASK'));
+        break;
       }
     }
   }

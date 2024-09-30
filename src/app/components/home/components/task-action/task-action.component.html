@@ -1,1 +1,96 @@
-<p>task-action works!</p>
+<article class="grid grid-rows-[min-content_1fr] w-full h-full overflow-hidden">
+  <header class="w-full">
+    <div tabindex="0" role="button" class="cursor-pointer w-max py-2 px-4 flex gap-2 items-center" (click)="goBack()" (keyup.enter)="goBack()">
+      <app-custom-icon imageClass="h-4 w-2 xl:h-6 xl:w-4 bg-cover dark:invert" iconName="bg-back-icon"></app-custom-icon>
+      <h3 class="h3-class text-slate-900 dark:text-slate-200">{{'GLOBAL.INFORMATION.BACK' | translate}}</h3>
+    </div>
+  </header>
+  <section class="px-4 scrollbar overflow-y-auto">
+    <form class="flex flex-col gap-4" [formGroup]="taskForm">
+      <div class="custom-input">
+        <label for="taskName" class="h3-class dark:text-sky-400 text-sky-500">{{'HOME.ACTION.TASK-NAME' | translate }}:</label>
+        <input id="taskName" type="text" formControlName="taskName">
+      </div>
+
+      <div class="custom-input">
+        <label for="date" class="h3-class dark:text-sky-400 text-sky-500">{{'HOME.ACTION.DEADLINE' | translate }}:</label>
+        <div class="custom-input-container">
+          <input id="date" type="date" formControlName="deadline" [min]="minDate">
+          <app-custom-icon class="custom-input-icon" iconName="bg-calendar-icon"></app-custom-icon>
+        </div>
+      </div>
+      <section class="flex flex-col pl-4">
+        <header class="flex justify-between items-center">
+          <h2 class="h2-class text-slate-900 dark:text-slate-200">{{'HOME.LIST.ASSOCIATED-PEOPLE' | translate}}:</h2>
+          <app-custom-icon *ngIf="editingPerson === -1" class="cursor-pointer justify-self-end" [customTooltip]="'HOME.ACTION.ADD-PERSON' | translate"
+            [customLeft]="-200" (click)="addPersonForm()" iconName="bg-add-circle-icon"
+            imageClass="h-6 w-6 bg-cover dark:invert"></app-custom-icon>
+        </header>
+        <div formArrayName="associatedPeople">
+          <div class="border-solid border-2 border-transparent border-b-sky-500 dark:border-b-sky-400"
+              [formGroupName]="i" *ngFor="let person of associatedPeople.controls; let i = index">
+            <div class="relative pt-6 flex flex-col gap-4 pb-4 pl-4">
+              <app-custom-select *ngIf="editingPerson === -1" class="absolute top-2 right-0" labelIcon="bg-more-options-icon" [showOnlyIcon]="true"
+                                 [options]="selectOptions" (selectedOption)="moreOptionsAction($event, i)"
+                                 [removePadding]="true" labelIconClass="h-[1rem] w-[1rem] bg-cover dark:invert"></app-custom-select>
+              <ng-container *ngIf="editingPerson === i; else displayData">
+
+                <div class="custom-input">
+                  <label for="fullName" class="h3-class dark:text-sky-400 text-sky-500">{{'HOME.ACTION.FULL-NAME' | translate }}:</label>
+                  <input id="fullName" type="text" formControlName="fullName">
+                </div>
+                <div class="custom-input">
+                  <label for="age" class="h3-class dark:text-sky-400 text-sky-500">{{'HOME.ACTION.AGE' | translate }}:</label>
+                  <input id="age" type="number" formControlName="age">
+                </div>
+              </ng-container>
+              <ng-template #displayData>
+                <div class="w-full grid grid-cols-2 gap-4">
+                  <h3 class="h3-class dark:text-sky-400 text-sky-500">{{'HOME.ACTION.FULL-NAME' | translate}}:</h3>
+                  <p class="normal-class dark:text-slate-200 text-slate-900">{{person.controls.fullName.value}}</p>
+                </div>
+                <div class="w-full grid grid-cols-2 gap-4">
+                  <h3 class="h3-class dark:text-sky-400 text-sky-500">{{'HOME.ACTION.AGE' | translate}}:</h3>
+                  <p class="normal-class dark:text-slate-200 text-slate-900">{{person.controls.age.value}}</p>
+                </div>
+              </ng-template>
+
+              <section class="flex flex-col gap-2">
+                <header>
+                  <h2 class="h2-class text-slate-900 dark:text-slate-200">{{'HOME.LIST.SKILLS' | translate}}:</h2>
+                </header>
+                <ng-container *ngIf="addedSkills[i].length > 0">
+                  <div class="flex gap-3 flex-wrap px-1">
+                    <div *ngFor="let skill of addedSkills[i]; let j = index"
+                         class="max-w-full flex gap-3 items-center px-3 py-1 border-solid border-2 border-sky-500 dark:border-sky-400 rounded-[1rem]">
+                      <p class="break-all text-slate-900 dark:text-slate-200 text-sm xl:text-base">{{skill}}</p>
+                      <app-custom-icon *ngIf="editingPerson === i" class="cursor-pointer" imageClass="h-2 w-2 bg-cover" iconName="bg-close-blue-icon" (click)="removeSkill(addedSkills[i], j)"></app-custom-icon>
+                    </div>
+                  </div>
+                  <div *ngIf="editingPerson === i" class="separator"></div>
+                </ng-container>
+                <div *ngIf="editingPerson === i" class="flex gap-3 w-full items-center">
+                  <div class="custom-input-no-label">
+                    <input class="w-full" type="text" formControlName="skills" (keyup.enter)="addSkill(i)">
+                  </div>
+                  <app-custom-icon class="cursor-pointer justify-self-end" [customTooltip]="'HOME.ACTION.ADD-SKILL' | translate"
+                     [customLeft]="-200" (click)="addSkill(i)" iconName="bg-add-circle-icon"
+                     imageClass="h-6 w-6 bg-cover dark:invert"></app-custom-icon>
+                </div>
+              </section>
+
+              <div *ngIf="i === editingPerson" class="flex gap-4 justify-end">
+                <button class="filled-button max-w-[15rem] w-full" type="button"
+                  (click)="addPerson(i)">{{'HOME.ACTION.ADD-PERSON' | translate}}</button>
+                <button *ngIf="showCancelButton" class="outlined-button max-w-[15rem] w-full" type="button"
+                  (click)="cancelAddPerson(i)">{{'GLOBAL.INFORMATION.CANCEL' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <button *ngIf="editingPerson === -1 && taskForm.dirty" class="filled-button" type="button" (click)="taskFormAction()">{{'HOME.ACTION.SAVE-TASK' | translate}}</button>
+    </form>
+  </section>
+</article>

@@ -1,16 +1,20 @@
-<section class="h-full w-full overflow-hidden grid gap-2">
-  <article class="grid grid-cols-[repeat(3_min-content)] gap-4 px-4">
-    <h2 class="col-span-4 text-2xl xl:text-3xl font-semibold text-slate-900 dark:text-slate-200">{{'HOME.LIST.FILTERS' | translate}}:</h2>
-    <button [class]="selectedFilter === 'all' ? 'filled-button' : 'outlined-button'"
+<section class="h-full w-full overflow-hidden grid gap-2 grid-rows-[min-content_1fr]">
+  <article class="grid grid-cols-[repeat(3,min-content)] xl:grid-cols-3 gap-4 px-4 w-full justify-between">
+    <h2 class="h2-class col-span-2 text-slate-900 dark:text-slate-200">{{'HOME.LIST.FILTERS' | translate}}:</h2>
+    <app-custom-icon [customTooltip]="'GLOBAL.INFORMATION.CREATE-TASK' | translate" (click)="addNewTask()"
+      [customLeft]="-140" imageClass="h-[2rem] w-[2rem] bg-cover dark:invert"
+      class="cursor-pointer justify-self-end" iconName="bg-add-circle-icon"></app-custom-icon>
+    <button class="w-full" [class]="selectedFilter === 'all' ? 'filled-button' : 'outlined-button'"
       (click)="changeFilterType('all')">{{'HOME.LIST.ALL' | translate}}</button>
-    <button [class]="selectedFilter === 'completed' ? 'filled-button' : 'outlined-button'"
+    <button class="w-full" [class]="selectedFilter === 'completed' ? 'filled-button' : 'outlined-button'"
       (click)="changeFilterType('completed')">{{'HOME.LIST.COMPLETED' | translate}}</button>
-    <button [class]="selectedFilter === 'pending' ? 'filled-button' : 'outlined-button'"
+    <button class="w-full" [class]="selectedFilter === 'pending' ? 'filled-button' : 'outlined-button'"
       (click)="changeFilterType('pending')">{{'HOME.LIST.PENDING' | translate}}</button>
   </article>
-  <article class="h-full overflow-y-auto px-4 flex flex-col gap-3 scrollbar">
-    <ng-container *ngFor="let task of filteredTasks">
-      <app-task-card [taskData]="task"></app-task-card>
+  <div class="separator"></div>
+  <article class="h-full overflow-y-auto px-4 flex flex-col gap-3 scrollbar pb-2">
+    <ng-container *ngFor="let task of filteredTasks; let i = index">
+      <app-task-card [taskData]="task" (moreOptionsAction)="taskAction($event, i)"></app-task-card>
     </ng-container>
   </article>
 </section>

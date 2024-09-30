@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {LanguageCode, LanguageConfig} from 'src/app/shared/interfaces/language.interface';
 import {DarkThemeService} from '../../shared/services/dark-theme.service';
 import {SystemTheme} from '../../shared/interfaces/theme.interface';
 import {CustomSelectOption} from '../../shared/interfaces/custom.interface';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {filter, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  headerName = '';
   currentLanguage: LanguageConfig = {
     logo: 'bg-en-icon',
     code: LanguageCode.ENGLISH,
@@ -29,8 +31,10 @@ export class HomeComponent implements OnInit {
       value: 'spanish',
     },
   ];
+  subscription$?: Subscription;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private theme: DarkThemeService,
     private translate: TranslateService,
@@ -41,7 +45,29 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscription$ = this.router.events.pipe(filter((event): event is NavigationEnd =>
+      event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+      this.setHeaderName(event.url);
+    });
+    this.setHeaderName();
     this.getCurrentLanguage();
+  }
+
+  ngOnDestroy() {
+    if (this.subscription$) {
+      this.subscription$.unsubscribe();
+    }
+  }
+
+  setHeaderName(url?: string) {
+    if (url) {
+      this.headerName = url.includes('action') ? url.includes('create') ? 'HOME.ROUTE.CREATE' : 'HOME.ROUTE.EDIT'
+        : 'HOME.ROUTE.LIST';
+    } else {
+      this.headerName = this.route.snapshot.firstChild?.routeConfig?.path === 'action' ?
+        this.route.snapshot.firstChild?.queryParams['type'] === 'create' ? 'HOME.ROUTE.CREATE' : 'HOME.ROUTE.EDIT'
+        : 'HOME.ROUTE.LIST';
+    }
   }
 
   getCurrentLanguage() {

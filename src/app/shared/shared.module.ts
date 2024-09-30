@@ -9,11 +9,8 @@ import {TranslateModule} from '@ngx-translate/core';
 import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
 
-
-
 @NgModule({
   declarations: [
-
     IconComponent,
        CustomTooltipDirective,
        TaskCardComponent,

@@ -1,6 +1,6 @@
 import {EnvironmentDefinition} from './types';
 
-let data = window['env' as any] as unknown as EnvironmentDefinition;
+const data = window['env' as any] as unknown as EnvironmentDefinition;
 if(!data){
   console.error('Cannot recover env variables, check config');
 }

@@ -6,6 +6,28 @@
   outline: none;
 }
 
+.h1-class {
+  @apply text-3xl xl:text-4xl font-extrabold;
+}
+.h2-class {
+  @apply text-xl xl:text-2xl font-bold;
+}
+.h3-class {
+  @apply text-lg xl:text-xl font-semibold;
+}
+.h3-class {
+  @apply text-base xl:text-lg font-semibold;
+}
+.normal-class {
+  @apply text-base font-normal;
+}
+.separator {
+  @apply border-b-[.25rem] border-sky-500 dark:border-sky-400 opacity-20;
+  border-radius: 0 0 1rem 1rem;
+  height: 1rem;
+  width: 100%;
+  margin: 0 0 .5rem;
+}
 .custom-tooltip {
   @apply text-slate-900 dark:text-slate-200 text-xl xl:text-2xl dark:bg-slate-700 bg-slate-200;
   position: fixed;
@@ -14,6 +36,7 @@
   box-shadow: 0 0 1.5px 0.5px rgba(19, 23, 33, 0.15);
   z-index: 9999;
   pointer-events: none;
+  word-break: break-word;
 }
 .custom-select {
   @apply bg-transparent text-lg xl:text-xl text-slate-900 dark:text-slate-200 relative;
@@ -24,14 +47,16 @@
     cursor: pointer;
     gap: .5rem;
     align-items: center;
-    padding: .5rem 1rem;
   }
 
   .select-menu {
-    @apply dark:bg-slate-700 bg-slate-200 absolute w-full;
+    @apply dark:bg-slate-700 bg-slate-200 absolute min-w-max w-full;
+    z-index: 10;
     top: 100%;
-    padding: 0 1rem;
+    right: 0;
+    padding: 0 .75rem;
     border-radius: 0 0 .25rem .25rem;
+    box-shadow: -2px 6px 6px rgba(0, 0, 0, 0.3);
 
     .select-option {
       cursor: pointer;
@@ -40,6 +65,29 @@
       padding: .5rem 0;
       align-items: center;
       gap: .5rem;
+    }
+  }
+}
+
+.custom-input {
+  @apply grid-cols-[max-content_1fr] gap-2 xl:grid-cols-1;
+}
+.custom-input, .custom-input-no-label {
+  @apply grid w-full items-center;
+
+  input {
+    @apply bg-transparent outline-0 border-solid border-2 border-sky-500 dark:border-sky-400 rounded-[1rem] text-lg xl:text-xl text-slate-900 dark:text-slate-200;
+    width: 100%;
+    padding: .25rem .75rem;
+  }
+  .custom-input-container {
+    width: 100%;
+    position: relative;
+
+    .custom-input-icon {
+      @apply p-1 absolute cursor-pointer right-4 pointer-events-none dark:bg-slate-900 bg-slate-200;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }
@@ -76,7 +124,7 @@
 
 .outlined-button, .filled-button {
   @apply rounded-[.5rem] text-lg xl:text-xl;
-  padding: .5rem 1rem;
+  padding: .375rem 1rem;
 }
 
 .outlined-button {

@@ -1,0 +1,11 @@
+# Ignore built files
+build/*
+dist-test/*
+src/types/*
+coverage/*
+env_files/*
+node_modules
+src/index.html
+src/main.ts
+src/polyfills.ts
+dist/*

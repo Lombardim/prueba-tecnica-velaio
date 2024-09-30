@@ -7,11 +7,15 @@ import {CustomSelectOption} from '../../interfaces/custom.interface';
   styleUrls: ['./custom-select.component.scss']
 })
 export class CustomSelectComponent {
-  @Input() label: string = '';
+  @Input() label = '';
   @Input() labelIcon?: string;
+  @Input() labelIconClass = 'h-[1rem] w-[1.5rem] bg-cover';
+  @Input() removePadding = false;
+  @Input() showOnlyIcon = false;
+  @Input() hideLabelOnMobile = false;
   @Input() options: CustomSelectOption[] = [];
   @Output() selectedOption: EventEmitter<string> = new EventEmitter<string>;
-  menuOpen: boolean = false;
+  menuOpen = false;
 
   toggleSelect() {
     this.menuOpen = !this.menuOpen;

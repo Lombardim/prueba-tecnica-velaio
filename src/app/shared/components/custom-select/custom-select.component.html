@@ -1,14 +1,17 @@
-<section class="custom-select" (click)="toggleSelect()">
-  <div class="select-header">
-    <app-custom-icon *ngIf="labelIcon" imageClass="h-[1rem] w-[1.5rem] bg-cover" [iconName]="labelIcon"></app-custom-icon>
-    <p>{{ label | translate }}</p>
-    <ng-container *ngIf="!menuOpen; else collapse"><app-custom-icon iconName="bg-expand-icon"></app-custom-icon></ng-container>
+<section tabindex="0" class="custom-select" (click)="toggleSelect()" (keyup.enter)="toggleSelect()">
+  <div class="select-header" [class]="removePadding ? '' : 'px-2 py-3'">
+    <app-custom-icon *ngIf="labelIcon" [imageClass]="labelIconClass" [iconName]="labelIcon"></app-custom-icon>
+    <ng-container *ngIf="!showOnlyIcon">
+      <p [class]="hideLabelOnMobile ? 'hidden lg:block' : ''">{{ label | translate }}</p>
+      <ng-container *ngIf="!menuOpen; else collapse"><app-custom-icon iconName="bg-expand-icon"></app-custom-icon></ng-container>
+    </ng-container>
     <ng-template #collapse><app-custom-icon iconName="bg-minimize-icon"></app-custom-icon></ng-template>
   </div>
   <ul class="select-menu" *ngIf="menuOpen">
-    <li class="select-option" *ngFor="let option of options" (click)="selectOption(option)">
+    <li tabindex="1" class="select-option" *ngFor="let option of options" (click)="selectOption(option)" (keyup.enter)="selectOption(option)">
       <figure *ngIf="option.icon"><div class="h-[1rem] w-[1.5rem] bg-cover" [class]="option.icon"></div></figure>
       <p>{{ option.name | translate}}</p>
     </li>
   </ul>
 </section>
+<div tabindex="2" *ngIf="menuOpen" class="bg-transparent z-[9] absolute h-full w-full top-0 left-0" (click)="toggleSelect()" (keyup.enter)="toggleSelect()"></div>

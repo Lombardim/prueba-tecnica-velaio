@@ -10,7 +10,7 @@ import { SystemTheme } from './shared/interfaces/theme.interface';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'prueba-tecnica-velaio';
+  title = 'velaio-miguel-lombardi';
 
   constructor(
     private translate: TranslateService,

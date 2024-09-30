@@ -7,12 +7,10 @@ import { SystemTheme } from '../interfaces/theme.interface';
 export class DarkThemeService {
   private _currentTheme: SystemTheme = SystemTheme.LIGHT;
 
-  constructor() { }
-
   get isLightTheme(): boolean {
     return this._currentTheme === SystemTheme.LIGHT;
   }
-  
+
   updateSelectedTheme() {
     this._currentTheme = localStorage.getItem('theme') as SystemTheme;
     if (this._currentTheme === SystemTheme.DARK) {
@@ -24,7 +22,7 @@ export class DarkThemeService {
 
   changeTheme(theme: SystemTheme) {
     this._currentTheme = theme;
-    localStorage.setItem('theme', this._currentTheme)
+    localStorage.setItem('theme', this._currentTheme);
     this.updateSelectedTheme();
   }
 }

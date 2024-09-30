@@ -6,6 +6,6 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./custom-icon.component.scss']
 })
 export class CustomIconComponent {
-  @Input() imageClass: string = 'h-[1rem] w-[1rem] bg-cover dark:invert';
-  @Input() iconName: string = '';
+  @Input() imageClass = 'h-[1rem] w-[1rem] bg-cover dark:invert';
+  @Input() iconName = '';
 }
