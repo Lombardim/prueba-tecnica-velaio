@@ -26,7 +26,7 @@ export class TaskService {
     const tasks: TaskData[] = [];
     const todoList = await lastValueFrom(this.http.get<TodoInterface[]>(`${environment.api}/todos`));
     todoList.forEach((todo) => {
-      const date = new Date();
+      const date = faker.date.anytime();
       const month = date.getMonth();
       const day = date.getDate();
       tasks.push({
